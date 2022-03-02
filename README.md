@@ -1,6 +1,6 @@
-# ERC721_DualRoles
+# ERC_DualRoles
 
-ERC721_DualRoles example Truffle project
+ERC_DualRoles is an extension of ERC721 to support rental functions.
 
 ### Tools
 * [Visual Studio Code](https://code.visualstudio.com/)
