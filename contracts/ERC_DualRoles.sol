@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10; 
+pragma solidity ^0.8.0; 
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./IERC721_DualRoles.sol";
+import "./IERC_DualRoles.sol";
 
-contract ERC721_DualRoles is ERC721, IERC721_DualRoles {
+contract ERC_DualRoles is ERC721, IERC_DualRoles {
     struct UserInfo 
     {
         address user;   // address of user role

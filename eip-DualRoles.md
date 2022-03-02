@@ -2,7 +2,7 @@
 eip: <to be assigned>
 title: Separate NFT usage rights
 description: Add a new role, who has usage right of NFT.The user has the right to use NFT for a specified period of time.
-author: Anders(@emojidao.org)
+author: EmojiDAO (dev@emojidao.org)
 discussions-to: <URL>
 status: Draft
 type: <Standards Track, Meta, or Informational>
@@ -70,12 +70,12 @@ Powered by Truffle and Openzeppelin test helper.
 ## Reference Implementation
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10; 
+pragma solidity ^0.8.0; 
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./IERC721_DualRoles.sol";
+import "./IERC_DualRoles.sol";
 
-contract ERC721_DualRoles is ERC721, IERC721_DualRoles {
+contract ERC_DualRoles is ERC721, IERC_DualRoles {
     struct UserInfo 
     {
         address user;   // address of user role

@@ -6,9 +6,7 @@
   "directories": {
     "test": "test"
   },
-  "scripts": {
-    
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
