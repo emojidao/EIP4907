@@ -58,7 +58,7 @@ When running the tests, you need to create a test network :
 
 ```
 truffle develop
-nft = await ERC721_DualRoles.new("ERC721_DualRoles","ERC721_DualRoles")
+nft = await ERC_DualRoles.new("ERC_DualRoles","ERC_DualRoles")
 nft.mint(1,accounts[0])
 nft.ownerOf(1)
 nft.setUser(1,accounts[1],33203038769)
