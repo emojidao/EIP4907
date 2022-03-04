@@ -22,7 +22,7 @@ npm run dev
 ### Test
 ```
 truffle develop
-nft = await ERC721_DualRoles.new("ERC721_DualRoles","ERC721_DualRoles")
+nft = await ERC_DualRoles.new("ERC_DualRoles","ERC_DualRoles")
 nft.mint(1,accounts[0])
 nft.ownerOf(1)
 nft.setUser(1,accounts[1],33203038769)
@@ -30,4 +30,4 @@ nft.userOf(1)
 ```
 
 ### Additional Resources
-* [Official Truffle Documentation](http://truffleframework.com/docs/) for compelte and detailed guides, tips, and sample code.
+* [Official Truffle Documentation](http://truffleframework.com/docs/) for complete and detailed guides, tips, and sample code.
