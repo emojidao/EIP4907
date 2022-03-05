@@ -37,12 +37,19 @@ contract ERC_DualRoles is ERC721, IERC_DualRoles {
      
     /**  get the user role of a token */
     function userOf(uint256 tokenId)public view virtual returns(address){
-        if( uint256(_users[tokenId].expires) >=  block.timestamp){
+        if( uint256(_users[tokenId].expires) >  block.timestamp){
             return  _users[tokenId].user; 
         }
         else{
             return address(0);
         }
+    }
+
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     */
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(IERC_DualRoles).interfaceId || super.supportsInterface(interfaceId);
     }
 
     /**
