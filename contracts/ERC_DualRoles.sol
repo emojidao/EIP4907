@@ -12,6 +12,7 @@ contract ERC_DualRoles is ERC721, IERC_DualRoles {
     }
 
     mapping (uint256  => UserInfo) internal _users;
+    
 
     constructor(string memory name_, string memory symbol_)
      ERC721(name_,symbol_)
@@ -19,7 +20,7 @@ contract ERC_DualRoles is ERC721, IERC_DualRoles {
      }
     
     function setUser(uint256 tokenId, address user, uint64 expires) public virtual{
-        require(_isApprovedOrOwner(msg.sender, tokenId),"ERC721: transfer caller is not owner nor approved");
+        require(_isApprovedOrOwner(msg.sender, tokenId),"caller is not owner nor approved");
         UserInfo storage info =  _users[tokenId];
         info.user = user;
         info.expires = expires;
@@ -44,18 +45,37 @@ contract ERC_DualRoles is ERC721, IERC_DualRoles {
         }
     }
 
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal virtual override{
+    /**
+     * @dev Hook that is called before any token transfer. This includes minting
+     * and burning.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
+     * transferred to `to`.
+     * - When `from` is zero, `tokenId` will be minted for `to`.
+     * - When `to` is zero, ``from``'s `tokenId` will be burned.
+     * - `from` and `to` are never both zero.
+     *
+     */
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override{
         super._beforeTokenTransfer(from, to, tokenId);
-
         if (from != to) {
             _users[tokenId].user = address(0);
             _users[tokenId].expires = 0;
             emit UpdateUser(tokenId,address(0),0);
         }
+    }
+
+    /**
+     * @dev Returns whether `spender` is allowed to use `tokenId`.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     */
+    function _isApprovedOrOwnerOrUser(address spender, uint256 tokenId) internal view virtual returns (bool) {
+        return (_isApprovedOrOwner(spender, tokenId) || spender == userOf(tokenId));
     }
 
     // for test
