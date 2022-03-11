@@ -1,24 +1,28 @@
 ---
 eip: <to be assigned>
-title: Separate NFT usage rights
-description: Add a new role, who has usage right of NFT.The user has the right to use NFT for a specified period of time.
+title: ERC-721 User And Expires Extension
+description: Standard interface extension for ERC-721 user and expires.
 author: EmojiDAO (dev@emojidao.org)
 discussions-to: <URL>
 status: Draft
-type: <Standards Track, Meta, or Informational>
+type: <Standards Track>
 category (*only required for Standards Track): <ERC>
-created: 2022-02-25
+created: 2022-03-11
 requires (*optional): <EIP 165 721>
 ---
 This standard proposes an extension to ERC721 Non-Fungible Tokens (NFTs) to separate NFT usage rights.
 
 ## Abstract
-This standard is an extension of ERC721. 
-NFT owners take ownership,NFT users take usage rights.
-The owner can change the user and the end time of usage rights.
+This standard is an extension of ERC721. It proposes an additional role **user** and a valid duration indicator **expires**. It allows users and developers manage the use right more simple and efficient.
 
 ## Motivation
-Owner of the NFT and the real user may not be the same person. Adding the role of user allows others to use this NFT without transferring ownership, increasing the usage of the NFT. Common scenarios like: renting a house, renting a car, OEM, etc.
+Some NFTs have certain utilities. In-game NFTs can be used to play, virtual land can be used to build scenes, music NFT can be used to enjoy , etc. But in some cases, the owner and user may not be the same person. People may invest in an NFT with utility, but they may not have time or ability to use it. So separating use right from ownership makes a lot of sense.
+
+Nowadays, many NFTs are managed by adding the role of **controller/operator** . People in  these roles can perform specific usage actions but can’t approve or transfer the NFT like an owner. If owner plans to set someone as **controller/operator** for a certain period of time, owner needs to submit two on-chain transactions, at the start time and the end time. 
+
+It is conceivable that with the further expansion of NFT application, the problem of usage rights management will become more common, so it is necessary to establish a unified standard to facilitate collaboration among all applications.
+
+By adding **user**, it enables multiple protocols to integrate and build on top of usage rights, while **expires** facilitates automatic ending of each usage without second transaction on chain.
 
 ## Specification
 This standard proposes two user roles: the **Owner**, and the **User**.Their rights are as follows:
@@ -46,7 +50,20 @@ function userExpires(uint256 tokenId) external view returns(uint256);
 
 
 ## Rationale
-The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages.
+Many developers are trying to develop based on the NFT utility, and some of them have added roles already, but there are some key problems need to be solved.  The advantages of this standard are below.
+
+### Clear Permissions Management
+Usage rights are part of ownership, so **owner** can modify **user** at any time, while **user** is only granted some specific permissions, such as **user** usually does not have permission to make permanent changes to NFT's Metadata.
+
+NFTs may be used in multiple applications, and adding the user role to  NFTs  makes it easier for the application to make special grants of rights.
+
+### Simple On-chain Time Management
+Most NFTs do not take into account the expiration time even though the role of the user is added, resulting in the need for the owner to manually submit on-chain transaction to cancel the user rights, which does not allow accurate on-chain management of the use time and will waste gas.
+
+The usage right often corresponds to a specific time, such as deploying scenes on land, renting game props, etc. Therefore, it can reduce the on-chain transactions and save gas with **expires**.
+
+### Easy Third-Party Integration
+The standard makes it easier for third-party protocols to manage NFT usage rights without permission from the NFT issuer or the NFT application.
 
 ## Backwards Compatibility
 As mentioned in the specifications section, this standard can be fully ERC721 compatible by adding an extension function set.
