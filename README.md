@@ -1,6 +1,5 @@
-# ERC_DualRoles
-
-ERC_DualRoles is an extension of ERC721 to support rental functions.
+# EIP4907
+EIP4907 is an extension of ERC-721. It proposes an additional role **user** and a valid duration indicator **expires**. It allows users and developers manage the use right more simple and efficient.
 
 ### Tools
 * [Visual Studio Code](https://code.visualstudio.com/)
@@ -22,10 +21,11 @@ npm run dev
 ### Test
 ```
 truffle develop
-nft = await ERC_DualRoles.new("ERC_DualRoles","ERC_DualRoles")
+nft = await ERC4907Demo.new("ERC4907Demo","ERC4907Demo")
 nft.mint(1,accounts[0])
 nft.ownerOf(1)
-nft.setUser(1,accounts[1],33203038769)
+nft.userOf(1)
+nft.setUser(1,accounts[1],10203038769)
 nft.userOf(1)
 ```
 

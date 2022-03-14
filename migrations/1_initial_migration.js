@@ -1,5 +1,5 @@
-const ERC_DualRoles = artifacts.require("ERC_DualRoles");
+const ERC4907Demo = artifacts.require("ERC4907Demo");
 
 module.exports = function (deployer) {
-  deployer.deploy(ERC_DualRoles,"DualRoles","DualRoles");
+  deployer.deploy(ERC4907Demo);
 };

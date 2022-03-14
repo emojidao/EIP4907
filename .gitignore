@@ -1,8 +1,6 @@
 .idea
 package-lock.json
 node_modules
-config/key/private_key_prod.js
-config/key/private_key_localprod.js
 bin
 .vscode/
 build/
