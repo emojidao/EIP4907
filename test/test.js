@@ -9,7 +9,7 @@ contract("test", async accounts => {
         const Alice = accounts[0];
         const Bob = accounts[1];
 
-        const instance = await ERC4907Demo.deployed("T", "T");
+        const instance = await ERC4907Demo.deployed("ERC4907Demo", "ERC4907Demo");
         const demo = instance;
 
         await demo.mint(1, Alice);
