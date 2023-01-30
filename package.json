@@ -1,5 +1,5 @@
 {
-  "name": "hardhat-project",
+  "name": "eip4907",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.2",
     "@nomiclabs/hardhat-etherscan": "^3.1.5",
