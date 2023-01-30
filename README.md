@@ -1,27 +1,46 @@
-## Abstract
+# Advanced Sample Hardhat Project
 
-[EIP-4907](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-4907.md) is an extension of [EIP-721](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). It proposes an additional role **user** and a valid duration indicator **expires**. It allows users and developers manage the use right more simple and efficient.
+This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
 
-## Motivation
+The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
 
-Some NFTs have certain utilities. For example, virtual land can be "used" to build scenes, and NFTs representing game assets can be "used" in-game. In some cases, the owner and user may not always be the same. There may be an owner of the NFT that rents it out to a “user”. The actions that a “user” should be able to take with an NFT would be different from the “owner” (for instance, “users” usually shouldn’t be able to sell ownership of the NFT).  In these situations, it makes sense to have separate roles that identify whether an address represents an “owner” or a “user” and manage permissions to perform actions accordingly.
+Try running some of the following tasks:
 
-Some projects already use this design scheme under different names such as “operator” or “controller” but as it becomes more and more prevalent, we need a unified standard to facilitate collaboration amongst all applications.
-
-Furthermore, applications of this model (such as renting) often demand that user addresses have only temporary access to using the NFT. Normally, this means the owner needs to submit two on-chain transactions, one to list a new address as the new user role at the start of the duration and one to reclaim the user role at the end. This is inefficient in both labor and gas and so an “expires” function is introduced that would facilitate the automatic end of a usage term without the need of a second transaction.
-
-## Test
-### Tools
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [Solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity) - Solidity support for Visual Studio code
-* [Truffle](https://truffleframework.com/) - the most popular development framework for Ethereum
-
-### Install
+```shell
+npx hardhat accounts
+npx hardhat compile
+npx hardhat clean
+npx hardhat test
+npx hardhat node
+npx hardhat help
+REPORT_GAS=true npx hardhat test
+npx hardhat coverage
+npx hardhat run scripts/deploy.ts
+TS_NODE_FILES=true npx ts-node scripts/deploy.ts
+npx eslint '**/*.{js,ts}'
+npx eslint '**/*.{js,ts}' --fix
+npx prettier '**/*.{json,sol,md}' --check
+npx prettier '**/*.{json,sol,md}' --write
+npx solhint 'contracts/**/*.sol'
+npx solhint 'contracts/**/*.sol' --fix
 ```
-npm install
+
+# Etherscan verification
+
+To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+
+In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+
+```shell
+hardhat run --network ropsten scripts/deploy.ts
 ```
 
-### Test
+Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+
+```shell
+npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 ```
-truffle test
-```
+
+# Performance optimizations
+
+For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
